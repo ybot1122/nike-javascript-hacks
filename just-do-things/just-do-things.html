@@ -9,9 +9,15 @@
 
 <template name="expandables">
     {{#each rival}}
-        <div class="clickable" data-a={{a}} data-b={{b}}>
-            {{a}} versus {{b}}
-        </div>
+        {{#if data}}
+            {{#with data}}
+                {{> comparison}}
+            {{/with}}
+        {{else}}
+            <div class="clickable" data-a={{a}} data-b={{b}}>
+                {{a}} versus {{b}}
+            </div>
+        {{/if}}
     {{/each}}
 </template>
 

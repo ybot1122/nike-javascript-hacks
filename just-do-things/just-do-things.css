@@ -10,6 +10,8 @@ h2 {
     border: 1px black solid;
     font-size: 50px;
     cursor: pointer;
+    float: left;
+    width: 100%;
 }
 
 .clickable:hover {
@@ -19,7 +21,6 @@ h2 {
 .compare {
     float: left;
     margin-bottom: 50px;
-    padding: 5%;
     width: 100%;
 }
 

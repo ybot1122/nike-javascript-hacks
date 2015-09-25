@@ -23,14 +23,13 @@ const getRivalryData = function(a, b) {
 
 if (Meteor.isClient) {
 
+  let content = new Meteor.Collection(null);
+  content.insert({a: 'UW', b: 'UO'});
+  content.insert({a: 'Messi', b: 'Ronaldo'});
+  content.insert({a: 'Sherman', b: 'Crabtree'});
+  console.log(content.find().fetch());
   Template.expandables.helpers({
-    rival: [
-      {a: 'UW', b: 'UO'},
-      {a: 'Messi', b: 'Ronaldo'},
-      {a: 'Sherman', b: 'Crabtree'},
-      {a: 'Chelsea', b: 'Arsenal'},
-      {a: 'Yankees', b: 'Red Sox'}
-    ]
+    rival: content.find().fetch()
   });
 
   Template.expandables.events({
@@ -39,51 +38,6 @@ if (Meteor.isClient) {
       const b = e.target.getAttribute('data-b');
       console.log(getRivalryData(a, b));
     }
-  });
-
-  Template.rivalry.helpers({
-    rival: [
-      {
-        left: {
-          name: 'UW',
-          source: 'images/uw.jpg',
-          tweets: [
-            {message: 'godawgs'},
-            {message: 'woof'},
-            {message: 'bark'}
-          ]
-        },
-        right: {
-          name: 'UO',
-          source: 'images/uo.jpg',
-          tweets: [
-            {message: 'hello'},
-            {message: 'dssadad'},
-            {message: 'hefffasllo'}
-          ]
-        }
-      },
-      {
-        left: {
-          name: 'Messi',
-          source: 'images/uw.jpg',
-          tweets: [
-            {message: 'godawgs'},
-            {message: 'woof'},
-            {message: 'bark'}
-          ]
-        },
-        right: {
-          name: 'Ronaldo',
-          source: 'images/uo.jpg',
-          tweets: [
-            {message: 'hello'},
-            {message: 'dssadad'},
-            {message: 'hefffasllo'}
-          ]
-        }
-      }
-    ]
   });
 }
 
