@@ -22,21 +22,22 @@ const getRivalryData = function(a, b) {
 }
 
 if (Meteor.isClient) {
+  let Content = new Meteor.Collection(null);
+  Content.insert({a: 'UW', b: 'UO'});
+  Content.insert({a: 'Messi', b: 'Ronaldo'});
+  Content.insert({a: 'Sherman', b: 'Crabtree'});
 
-  let content = new Meteor.Collection(null);
-  content.insert({a: 'UW', b: 'UO'});
-  content.insert({a: 'Messi', b: 'Ronaldo'});
-  content.insert({a: 'Sherman', b: 'Crabtree'});
-  console.log(content.find().fetch());
+  console.log(Content.find().fetch());
+
   Template.expandables.helpers({
-    rival: content.find().fetch()
+    rival: Content.find().fetch()
   });
 
   Template.expandables.events({
     click: function(e) {
       const a = e.target.getAttribute('data-a');
       const b = e.target.getAttribute('data-b');
-      console.log(getRivalryData(a, b));
+      Content.update({a: a, b: b}, {a: a, b: b, data: getRivalryData(a, b)}, {multi: false});
     }
   });
 }
