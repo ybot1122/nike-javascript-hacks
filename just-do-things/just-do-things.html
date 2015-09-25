@@ -3,12 +3,35 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <h1>Hello</h1>
 
-  {{> hello}}
+  {{> comparison}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="comparison">
+  <div id="left">
+    <div class="pic">
+        <img src="images/uw.jpg" />
+    </div>
+    <div class="tweet">
+        Sample Tweet 1
+    </div>
+    <div class="tweet">
+        Sample Tweet 1
+    </div>
+    <div class="tweet">
+        Sample Tweet 1
+    </div>
+    <div class="tweet">
+        Sample Tweet 1
+    </div>
+  </div>
+  <div id="right">
+    <div class="pic">
+        <img src="images/uo.jpg" />
+    </div>
+    <div class="tweet">
+        Sample Tweet 1
+    </div>
+  </div>
 </template>
