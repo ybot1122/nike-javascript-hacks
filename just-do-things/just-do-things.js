@@ -3,7 +3,7 @@ Player = new Meteor.Collection('Player');
 
 if (Meteor.isClient) {
 
-  let opened = [{a: 'UW', b: 'UO'}];
+  let opened = [{a: 'UW', b: 'WSU'},{a: 'UW', b: 'UO'},{a: 'Sherman', b: 'Crabtree'},{a: 'Yankees', b: 'Red Sox'}];
 
   Template.expandables.helpers({
     rival: function() {
@@ -11,6 +11,7 @@ if (Meteor.isClient) {
       return result;
     },
     data: function(a, b) {
+      console.log(a + 'vs' + b);
       if (_.findWhere(opened, {a: a, b: b})) {
         let l = Player.findOne({name: a});
         let r = Player.findOne({name: b});
@@ -51,6 +52,7 @@ if (Meteor.isServer) {
     Rivalry.remove({});
     Player.remove({});
     Rivalry.insert({a: 'UW', b: 'UO'});
+    Rivalry.insert({a: 'UW', b: 'WSU'});
     Rivalry.insert({a: 'Sherman', b: 'Crabtree'});
     Rivalry.insert({a: 'Yankees', b: 'Red Sox'});
     Player.insert({name: 'UW', image: 'images/UW.jpg', tweets: [
@@ -65,6 +67,61 @@ if (Meteor.isServer) {
       ]
     });
     Player.insert({name: 'UO', image: 'images/UO.jpg', tweets: [
+        {
+          message: 'hello hello',
+          time: '1:04 pm'
+        },
+        {
+          message: 'hello hello',
+          time: '1:04 pm'
+        }
+      ]
+    });
+    Player.insert({name: 'WSU', image: 'images/wsu.jpg', tweets: [
+        {
+          message: 'hello hello',
+          time: '1:04 pm'
+        },
+        {
+          message: 'hello hello',
+          time: '1:04 pm'
+        }
+      ]
+    });
+    Player.insert({name: 'Crabtree', image: 'images/crabtree.jpeg', tweets: [
+        {
+          message: 'hello hello',
+          time: '1:04 pm'
+        },
+        {
+          message: 'hello hello',
+          time: '1:04 pm'
+        }
+      ]
+    });
+    Player.insert({name: 'Sherman', image: 'images/sherman.jpeg', tweets: [
+        {
+          message: 'hello hello',
+          time: '1:04 pm'
+        },
+        {
+          message: 'hello hello',
+          time: '1:04 pm'
+        }
+      ]
+    });
+    Player.insert({name: 'Red Sox', image: 'images/redsox.jpeg', tweets: [
+        {
+          message: 'hello hello',
+          time: '1:04 pm'
+        },
+        {
+          message: 'hello hello',
+          time: '1:04 pm'
+        }
+      ]
+    });
+    Player.insert({name: 'Yankees', image: 'images/yankees.jpeg', tweets: [
         {
           message: 'hello hello',
           time: '1:04 pm'
