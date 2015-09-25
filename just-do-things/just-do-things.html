@@ -9,8 +9,8 @@
 
 <template name="expandables">
     {{#each rival}}
-        {{#if data}}
-            {{#with data}}
+        {{#if data (a) (b)}}
+            {{#with data (a) (b)}}
                 {{> comparison}}
             {{/with}}
         {{else}}
@@ -42,7 +42,7 @@
   <div class="column">
     <h2>{{name}}</h2>
     <div class="pic">
-        <img src="{{source}}" />
+        <img src="{{image}}" />
     </div>
     <div class="chatroom">
         {{#each tweets}}
