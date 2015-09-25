@@ -1,40 +1,14 @@
-Content = new Meteor.Collection(null);
-const getRivalryData = function(a, b) {
-  return {
-    left: {
-      name: a,
-      source: 'images/' + a + '.jpg',
-      tweets: [
-        {
-          message: 'hello hello',
-          time: '1:04 pm'
-        },
-        {
-          message: 'hello hello',
-          time: '1:04 pm'
-        }
-      ]
-    },
-    right: {
-      name: b,
-      source: 'images/' + b + '.jpg',
-      tweets: []
-    }
-  }
-}
+Rivalry = new Meteor.Collection(null);
+Player = new Meteor.Collection(null);
+Rivalry.insert({a: 'UW', b: 'UO'});
 
 if (Meteor.isClient) {
-  Content.insert({a: 'UW', b: 'UO'});
-  Content.insert({a: 'Messi', b: 'Ronaldo'});
-  Content.insert({a: 'Sherman', b: 'Crabtree'});
 
-  console.log(Content.find().fetch());
-
-  let blargh = Content.find().fetch();
+  let opened = [];
 
   Template.expandables.helpers({
     rival: function() {
-      return Content.find().fetch();
+      return Rivalry.find().fetch();
     }
   });
 
@@ -42,8 +16,6 @@ if (Meteor.isClient) {
     click: function(e) {
       const a = e.target.getAttribute('data-a');
       const b = e.target.getAttribute('data-b');
-      Content.update({a: a, b: b}, {a: 'BLLAAG', b: b, data: getRivalryData(a, b)}, {multi: false});
-      blargh = Content.find().fetch();
     }
   });
 
@@ -71,8 +43,39 @@ if (Meteor.isServer) {
 
   Meteor.methods({
     submitTweet: function(a, message) {
+      /*
+      Content.update(
+        {$or: [{'a': a}, {'b': a}]},
+        {$push: {
+        }}
+      );
+*/
       console.log(a + ': ' + message);
       return true;
     }
   })
 }
+
+
+Player.insert({name: 'UW', image: 'images/UW.jpg', tweets: [
+    {
+      message: 'hello hello',
+      time: '1:04 pm'
+    },
+    {
+      message: 'hello hello',
+      time: '1:04 pm'
+    }
+  ]
+});
+Player.insert({name: 'UO', image: 'images/UO.jpg', tweets: [
+    {
+      message: 'hello hello',
+      time: '1:04 pm'
+    },
+    {
+      message: 'hello hello',
+      time: '1:04 pm'
+    }
+  ]
+});
