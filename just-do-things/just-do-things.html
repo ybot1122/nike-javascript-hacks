@@ -4,8 +4,16 @@
 
 <body>
     <h1>Rival Tweets</h1>
-    {{> rivalry}}
+    {{> expandables}}
 </body>
+
+<template name="expandables">
+    {{#each rival}}
+        <div class="clickable" data-a={{a}} data-b={{b}}>
+            {{a}} versus {{b}}
+        </div>
+    {{/each}}
+</template>
 
 <template name="rivalry">
     {{#each rival}}

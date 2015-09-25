@@ -1,4 +1,46 @@
+const getRivalryData = function(a, b) {
+  return {
+    left: {
+      name: a,
+      source: 'images/' + a + '.jpg',
+      tweets: [
+        {message: a + 'godawgs'},
+        {message: a + 'woof'},
+        {message: a + 'bark'}
+      ]
+    },
+    right: {
+      name: b,
+      source: 'images/' + b + '.jpg',
+      tweets: [
+        {message: b + 'hello'},
+        {message: b + 'dssadad'},
+        {message: b + 'hefffasllo'}
+      ]
+    }
+  }
+}
+
 if (Meteor.isClient) {
+
+  Template.expandables.helpers({
+    rival: [
+      {a: 'UW', b: 'UO'},
+      {a: 'Messi', b: 'Ronaldo'},
+      {a: 'Sherman', b: 'Crabtree'},
+      {a: 'Chelsea', b: 'Arsenal'},
+      {a: 'Yankees', b: 'Red Sox'}
+    ]
+  });
+
+  Template.expandables.events({
+    click: function(e) {
+      const a = e.target.getAttribute('data-a');
+      const b = e.target.getAttribute('data-b');
+      console.log(getRivalryData(a, b));
+    }
+  });
+
   Template.rivalry.helpers({
     rival: [
       {
