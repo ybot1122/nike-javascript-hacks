@@ -51,8 +51,19 @@ h2 {
     height: 300px;
 }
 
+.chatroom {
+    height: 350px;
+    overflow: scroll;
+}
+
 .tweet {
+    padding: 5px;
+}
+
+.submit {
     padding: 10px;
-    margin: 5px;
-    border: 1px black solid;
+}
+
+.submit input:first-child {
+    width: 75%;
 }

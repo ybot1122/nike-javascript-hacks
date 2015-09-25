@@ -3,20 +3,12 @@ const getRivalryData = function(a, b) {
     left: {
       name: a,
       source: 'images/' + a + '.jpg',
-      tweets: [
-        {message: a + 'godawgs'},
-        {message: a + 'woof'},
-        {message: a + 'bark'}
-      ]
+      tweets: []
     },
     right: {
       name: b,
       source: 'images/' + b + '.jpg',
-      tweets: [
-        {message: b + 'hello'},
-        {message: b + 'dssadad'},
-        {message: b + 'hefffasllo'}
-      ]
+      tweets: []
     }
   }
 }
@@ -29,15 +21,29 @@ if (Meteor.isClient) {
 
   console.log(Content.find().fetch());
 
+  let blargh = Content.find().fetch();
+
   Template.expandables.helpers({
-    rival: Content.find().fetch()
+    rival: function() {
+      return Content.find().fetch();
+    }
   });
 
   Template.expandables.events({
     click: function(e) {
       const a = e.target.getAttribute('data-a');
       const b = e.target.getAttribute('data-b');
-      Content.update({a: a, b: b}, {a: a, b: b, data: getRivalryData(a, b)}, {multi: false});
+      Content.update({a: a, b: b}, {a: 'BLLAAG', b: b, data: getRivalryData(a, b)}, {multi: false});
+      blargh = Content.find().fetch();
+    }
+  });
+
+  Template.submission.events({
+    'submit .submit': function(e) {
+      e.preventDefault();
+      const text = e.target.text.value;
+      console.log(text);
+      e.target.text.value = "";
     }
   });
 }

@@ -44,10 +44,20 @@
     <div class="pic">
         <img src="{{source}}" />
     </div>
-    {{#each tweets}}
-        <div class="tweet">
-            {{message}}
-        </div>
-    {{/each}}
+    <div class="chatroom">
+        {{#each tweets}}
+            <div class="tweet">
+                {{message}}
+            </div>
+        {{/each}}
+    </div>
+    {{> submission}}
   </div>
+</template>
+
+<template name="submission">
+    <form class="submit">
+        <input class="talk" name="text" type="text" />
+        <input class="smack" type="submit" value="send" />
+    </form>
 </template>
