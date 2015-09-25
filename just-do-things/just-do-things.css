@@ -1,24 +1,38 @@
 /* CSS declarations go here */
-#left, #right {
+
+h2 {
+    text-align: center;
+}
+
+.compare {
+    float: left;
+    margin-bottom: 50px;
+}
+
+.column {
     float: left;
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
-    width: 48%;
+    width: 49%;
     display: inline-block;
     border: 1px black solid;
 }
 
-#left {
+.column:first-child {
     margin-right: 1%;
 }
 
-#right {
+.column:last-child {
     margin-left: 1%;
 }
 
 .pic {
-    width: 100%;
+    text-align: center;
+}
+
+.pic img {
+    width: 95%;
     height: 300px;
 }
 

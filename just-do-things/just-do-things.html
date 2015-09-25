@@ -3,35 +3,37 @@
 </head>
 
 <body>
-  <h1>Hello</h1>
-
-  {{> comparison}}
+    <h1>Rival Tweets</h1>
+    {{> rivalry}}
 </body>
 
+<template name="rivalry">
+    {{#each rival}}
+        {{> comparison}}
+    {{/each}}
+</template>
+
 <template name="comparison">
-  <div id="left">
+    <div class="compare">
+        {{#with left}}
+            {{> column}}
+        {{/with}}
+        {{#with right}}
+            {{> column}}
+        {{/with}}
+    </div>
+</template>
+
+<template name="column">
+  <div class="column">
+    <h2>{{name}}</h2>
     <div class="pic">
-        <img src="images/uw.jpg" />
+        <img src="{{source}}" />
     </div>
-    <div class="tweet">
-        Sample Tweet 1
-    </div>
-    <div class="tweet">
-        Sample Tweet 1
-    </div>
-    <div class="tweet">
-        Sample Tweet 1
-    </div>
-    <div class="tweet">
-        Sample Tweet 1
-    </div>
-  </div>
-  <div id="right">
-    <div class="pic">
-        <img src="images/uo.jpg" />
-    </div>
-    <div class="tweet">
-        Sample Tweet 1
-    </div>
+    {{#each tweets}}
+        <div class="tweet">
+            {{message}}
+        </div>
+    {{/each}}
   </div>
 </template>
