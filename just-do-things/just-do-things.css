@@ -67,3 +67,17 @@ h2 {
 .submit input:first-child {
     width: 75%;
 }
+
+.tweet span {
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.tweet span:first-child {
+    font-size: 8px;
+}
+
+.tweet span:last-child {
+    margin-bottom: 5px;
+}

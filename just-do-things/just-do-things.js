@@ -1,9 +1,14 @@
+Content = new Meteor.Collection(null);
 const getRivalryData = function(a, b) {
   return {
     left: {
       name: a,
       source: 'images/' + a + '.jpg',
-      tweets: []
+      tweets: [
+      {
+        message: 'hello hello',
+        time: '1:04 pm'
+      }]
     },
     right: {
       name: b,
@@ -14,7 +19,6 @@ const getRivalryData = function(a, b) {
 }
 
 if (Meteor.isClient) {
-  let Content = new Meteor.Collection(null);
   Content.insert({a: 'UW', b: 'UO'});
   Content.insert({a: 'Messi', b: 'Ronaldo'});
   Content.insert({a: 'Sherman', b: 'Crabtree'});
@@ -52,4 +56,10 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
   });
+
+  Meteor.methods({
+    submitTweet: function(rivalry, message) {
+
+    }
+  })
 }
