@@ -3,7 +3,7 @@ Player = new Meteor.Collection('Player');
 
 if (Meteor.isClient) {
 
-  let opened = [{a: 'UW', b: 'WSU'},{a: 'UW', b: 'UO'},{a: 'Sherman', b: 'Crabtree'},{a: 'Yankees', b: 'Red Sox'}];
+  Session.set('opened', []);
 
   Template.expandables.helpers({
     rival: function() {
@@ -12,7 +12,7 @@ if (Meteor.isClient) {
     },
     data: function(a, b) {
       console.log(a + 'vs' + b);
-      if (_.findWhere(opened, {a: a, b: b})) {
+      if (_.findWhere(Session.get('opened'), {a: a, b: b})) {
         let l = Player.findOne({name: a});
         let r = Player.findOne({name: b});
         if (l && r) {
@@ -27,7 +27,9 @@ if (Meteor.isClient) {
     click: function(e) {
       const a = e.target.getAttribute('data-a');
       const b = e.target.getAttribute('data-b');
-      opened.push({a: a, b: b});
+      let existing = Session.get('opened');
+      existing.push({a: a, b: b});
+      Session.set('opened', existing);
       console.log(Player.find().fetch());
     }
   });
