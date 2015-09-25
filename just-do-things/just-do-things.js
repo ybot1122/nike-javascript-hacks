@@ -5,10 +5,15 @@ const getRivalryData = function(a, b) {
       name: a,
       source: 'images/' + a + '.jpg',
       tweets: [
-      {
-        message: 'hello hello',
-        time: '1:04 pm'
-      }]
+        {
+          message: 'hello hello',
+          time: '1:04 pm'
+        },
+        {
+          message: 'hello hello',
+          time: '1:04 pm'
+        }
+      ]
     },
     right: {
       name: b,
@@ -46,8 +51,15 @@ if (Meteor.isClient) {
     'submit .submit': function(e) {
       e.preventDefault();
       const text = e.target.text.value;
-      console.log(text);
+      const a = e.target.getAttribute('data-name');
+      if (!text || text === '') {
+        return;
+      }
       e.target.text.value = "";
+      console.log(e);
+      Meteor.call('submitTweet', a, text, function(err, data) {
+
+      });
     }
   });
 }
@@ -58,8 +70,9 @@ if (Meteor.isServer) {
   });
 
   Meteor.methods({
-    submitTweet: function(rivalry, message) {
-
+    submitTweet: function(a, message) {
+      console.log(a + ': ' + message);
+      return true;
     }
   })
 }
