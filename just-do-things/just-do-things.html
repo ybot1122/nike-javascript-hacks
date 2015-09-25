@@ -3,7 +3,7 @@
 </head>
 
 <body>
-    <h1>Rival Tweets</h1>
+    <h1>SMAKCK TALCKK</h1>
     {{> expandables}}
 </body>
 
@@ -11,6 +11,7 @@
     {{#each rival}}
         {{#if data (a) (b)}}
             {{#with data (a) (b)}}
+                {{> close}}
                 {{> comparison}}
             {{/with}}
         {{else}}
@@ -25,6 +26,12 @@
     {{#each rival}}
         {{> comparison}}
     {{/each}}
+</template>
+
+<template name="close">
+    <div class="close" data-a={{left.name}} data-b={{right.name}}>
+        CLOSE
+    </div>
 </template>
 
 <template name="comparison">

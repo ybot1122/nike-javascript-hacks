@@ -11,7 +11,6 @@ if (Meteor.isClient) {
       return result;
     },
     data: function(a, b) {
-      console.log(a + 'vs' + b);
       if (_.findWhere(Session.get('opened'), {a: a, b: b})) {
         let l = Player.findOne({name: a});
         let r = Player.findOne({name: b});
@@ -24,13 +23,27 @@ if (Meteor.isClient) {
   });
 
   Template.expandables.events({
-    click: function(e) {
+    'click .clickable': function(e) {
       const a = e.target.getAttribute('data-a');
       const b = e.target.getAttribute('data-b');
       let existing = Session.get('opened');
-      existing.push({a: a, b: b});
-      Session.set('opened', existing);
-      console.log(Player.find().fetch());
+      if (!_.findWhere(Session.get('opened'), {a: a, b: b})) {
+        existing.push({a: a, b: b});
+        Session.set('opened', existing);
+      }
+    }
+  });
+
+  Template.close.events({
+    'click .close': function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const a = e.target.getAttribute('data-a');
+      const b = e.target.getAttribute('data-b');
+      let existing = Session.get('opened');
+      let updated = _.without(existing, _.findWhere(existing, {a: a, b: b}));
+      console.log(updated);
+      Session.set('opened', updated);
     }
   });
 
@@ -134,8 +147,6 @@ if (Meteor.isServer) {
         }
       ]
     });
-    console.log(Player.find().fetch());
-    console.log(Rivalry.find().fetch());
   });
 
   Meteor.methods({

@@ -1,5 +1,13 @@
 /* CSS declarations go here */
 
+html {
+    font-family: Verdana, Arial;
+}
+
+h1 {
+    text-align: center;
+}
+
 h2 {
     text-align: center;
 }
@@ -80,4 +88,8 @@ h2 {
 
 .tweet span:last-child {
     margin-bottom: 5px;
+}
+
+.close {
+    cursor: pointer;
 }
