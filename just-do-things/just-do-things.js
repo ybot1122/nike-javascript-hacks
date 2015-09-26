@@ -42,7 +42,6 @@ if (Meteor.isClient) {
       const b = e.target.getAttribute('data-b');
       let existing = Session.get('opened');
       let updated = _.without(existing, _.findWhere(existing, {a: a, b: b}));
-      console.log(updated);
       Session.set('opened', updated);
     }
   });
