@@ -1,5 +1,12 @@
 Session.set('opened', []);
 
+Template.activelist.helpers({
+  rivalries: function() {
+    let result = Rivalry.find().fetch();
+    return result;
+  }
+})
+
 Template.expandables.helpers({
   rival: function() {
     let result = Rivalry.find().fetch();

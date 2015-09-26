@@ -3,9 +3,22 @@
 </head>
 
 <body>
-    <h1>SMAKCK TALCKK</h1>
-    {{> expandables}}
+    <div id="rivalry-list">
+        <h2>Active Rivalries</h2>
+        {{> activelist}}
+    </div>
+    <div id="active-rivalry">
+        <h2>Yo</h2>
+    </div>
 </body>
+
+<template name="activelist">
+    {{#each rivalries}}
+        <div class="rivalry-item hvr-pulse-shrink">
+            {{a}} <span>versus</span> {{b}}
+        </div>
+    {{/each}}
+</template>
 
 <template name="expandables">
     {{#each rival}}
