@@ -1,5 +1,5 @@
 <head>
-  <title>just-do-things</title>
+  <title>SMAKCK TALCKK</title>
 </head>
 
 <body>
@@ -51,16 +51,20 @@
     <div class="pic">
         <img src="{{image}}" />
     </div>
+    {{> chatroom}}
+    {{> submission}}
+  </div>
+</template>
+
+<template name="chatroom">
     <div class="chatroom">
         {{#each tweets}}
             <div class="tweet">
-                <span>{{time}}</span>
+                <span>{{convertTime (time)}}</span>
                 <span>{{message}}</span>
             </div>
         {{/each}}
     </div>
-    {{> submission}}
-  </div>
 </template>
 
 <template name="submission">

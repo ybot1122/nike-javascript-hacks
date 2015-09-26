@@ -22,6 +22,7 @@ if (Meteor.isClient) {
     }
   });
 
+  // handler for expanding a rivalry view
   Template.expandables.events({
     'click .clickable': function(e) {
       const a = e.target.getAttribute('data-a');
@@ -34,6 +35,7 @@ if (Meteor.isClient) {
     }
   });
 
+  // handler for closing a rivalry view
   Template.close.events({
     'click .close': function(e) {
       e.preventDefault();
@@ -46,9 +48,11 @@ if (Meteor.isClient) {
     }
   });
 
+  // handler for submitting a message
   Template.submission.events({
     'submit .submit': function(e) {
       e.preventDefault();
+      console.log(e);
       const text = e.target.text.value;
       const a = e.target.getAttribute('data-name');
       if (!text || text === '') {
@@ -57,6 +61,27 @@ if (Meteor.isClient) {
       Meteor.call('submitTweet', a, text, function(err, data) {
         e.target.text.value = "";
       });
+    }
+  });
+
+  // handler for making a chatroom scrolled to bottom
+  Template.chatroom.rendered = function() {
+    this.firstNode.scrollTop = this.firstNode.scrollHeight;
+  };
+
+  // formatting time to user's local
+  Template.chatroom.helpers({
+    convertTime: function(ts) {
+      const d = new Date(ts * 1000);
+      let hr = d.getHours();
+      let min = d.getMinutes();
+      let secs = d.getSeconds();
+      let ampm = hr < 12 ? "am" : "pm";
+      hr = hr % 12;
+      if (min < 10) {
+          min = "0" + min;
+      }
+      return hr + ':' + min + ':' + secs + ' ' + ampm;
     }
   });
 }
@@ -72,77 +97,49 @@ if (Meteor.isServer) {
     Player.insert({name: 'UW', image: 'images/UW.jpg', tweets: [
         {
           message: 'hello hello',
-          time: '1:04 pm'
-        },
-        {
-          message: 'hello hello',
-          time: '1:04 pm'
+          time: 1443245826743
         }
       ]
     });
     Player.insert({name: 'UO', image: 'images/UO.jpg', tweets: [
         {
           message: 'hello hello',
-          time: '1:04 pm'
-        },
-        {
-          message: 'hello hello',
-          time: '1:04 pm'
+          time: 1443245826743
         }
       ]
     });
     Player.insert({name: 'WSU', image: 'images/wsu.jpg', tweets: [
         {
           message: 'hello hello',
-          time: '1:04 pm'
-        },
-        {
-          message: 'hello hello',
-          time: '1:04 pm'
+          time: 1443245826743
         }
       ]
     });
     Player.insert({name: 'Crabtree', image: 'images/crabtree.jpeg', tweets: [
         {
           message: 'hello hello',
-          time: '1:04 pm'
-        },
-        {
-          message: 'hello hello',
-          time: '1:04 pm'
+          time: 1443245826743
         }
       ]
     });
     Player.insert({name: 'Sherman', image: 'images/sherman.jpeg', tweets: [
         {
           message: 'hello hello',
-          time: '1:04 pm'
-        },
-        {
-          message: 'hello hello',
-          time: '1:04 pm'
+          time: 1443245826743
         }
       ]
     });
     Player.insert({name: 'Red Sox', image: 'images/redsox.jpeg', tweets: [
         {
           message: 'hello hello',
-          time: '1:04 pm'
-        },
-        {
-          message: 'hello hello',
-          time: '1:04 pm'
+          time: 1443245826743
         }
       ]
     });
     Player.insert({name: 'Yankees', image: 'images/yankees.jpeg', tweets: [
         {
           message: 'hello hello',
-          time: '1:04 pm'
-        },
-        {
-          message: 'hello hello',
-          time: '1:04 pm'
+          time: 1443245826743
         }
       ]
     });
@@ -150,21 +147,12 @@ if (Meteor.isServer) {
 
   Meteor.methods({
     submitTweet: function(a, message) {
-      var d = new Date();
-      var hr = d.getHours();
-      var min = d.getMinutes();
-      if (min < 10) {
-          min = "0" + min;
-      }
-      var ampm = hr < 12 ? "am" : "pm";
-      hr = hr % 12;
-      let str = hr + ':' + min + ' ' + ampm
       Player.update(
         {name: a},
         {$push: {
           tweets: {
               message: message,
-              time: str
+              time: Date.now()
             }
         }
       });
