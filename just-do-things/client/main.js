@@ -1,11 +1,33 @@
-Session.set('opened', []);
+Session.set('active', null);
 
 Template.activelist.helpers({
   rivalries: function() {
     let result = Rivalry.find().fetch();
     return result;
   }
-})
+});
+
+Template.activelist.events({
+  'click .rivalry-item': function(e) {
+    const a = e.target.getAttribute('data-a');
+    const b = e.target.getAttribute('data-b');
+    Session.set('active', {a: a, b: b});
+  }
+});
+
+Template.activebox.helpers({
+  data: function() {
+    const active = Session.get('active');
+    if (active && active.a && active.b) {
+      const l = Player.findOne({name: active.a});
+      const r = Player.findOne({name: active.b});
+      if (l && r) {
+        return {left: l, right: r}
+      }
+    }
+    return false;
+  }
+});
 
 Template.expandables.helpers({
   rival: function() {

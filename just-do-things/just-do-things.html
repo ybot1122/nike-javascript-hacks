@@ -8,16 +8,23 @@
         {{> activelist}}
     </div>
     <div id="active-rivalry">
-        <h2>Yo</h2>
+        <h2>SMACKIN TALK n TALKIN SMACK</h2>
+        {{> activebox}}
     </div>
 </body>
 
 <template name="activelist">
     {{#each rivalries}}
-        <div class="rivalry-item hvr-pulse-shrink">
+        <div class="rivalry-item hvr-pulse-shrink" data-a={{a}} data-b={{b}}>
             {{a}} <span>versus</span> {{b}}
         </div>
     {{/each}}
+</template>
+
+<template name="activebox">
+    {{#with data}}
+        {{> comparison}}
+    {{/with}}
 </template>
 
 <template name="expandables">
@@ -55,6 +62,8 @@
         {{#with right}}
             {{> column}}
         {{/with}}
+        {{> chatroom}}
+        {{> submission}}
     </div>
 </template>
 
@@ -64,8 +73,6 @@
     <div class="pic">
         <img src="{{image}}" />
     </div>
-    {{> chatroom}}
-    {{> submission}}
   </div>
 </template>
 

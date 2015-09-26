@@ -5,14 +5,14 @@ Meteor.startup(function () {
   Rivalry.insert({a: 'UW', b: 'WSU'});
   Rivalry.insert({a: 'Sherman', b: 'Crabtree'});
   Rivalry.insert({a: 'Yankees', b: 'Red Sox'});
-  Player.insert({name: 'UW', image: 'images/UW.jpg', tweets: [
+  Player.insert({name: 'UW', image: 'images/uw.jpg', tweets: [
       {
         message: 'hello hello',
         time: 1443245826743
       }
     ]
   });
-  Player.insert({name: 'UO', image: 'images/UO.jpg', tweets: [
+  Player.insert({name: 'UO', image: 'images/uo.jpg', tweets: [
       {
         message: 'hello hello',
         time: 1443245826743
