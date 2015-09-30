@@ -14,7 +14,7 @@ div {
 	display: inline-block;
 	border: 1px white solid;
 	margin: 5px;
-	height: calc(100vh - 20px);
+	min-height: calc(100vh - 20px);
 	overflow-y: auto;
 	overflow-x: hidden;
 }
@@ -34,7 +34,22 @@ div {
 	font-size: 15px;
 }
 
+.chatroom {
+    float: left;
+    height: 350px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 10px;
+}
 
+.talk {
+  width: 50%;
+}
+
+.smack {
+  width: 100%;
+}
 /* woot https://github.com/IanLunn/Hover */
 @-webkit-keyframes hvr-pulse-shrink {
   to {

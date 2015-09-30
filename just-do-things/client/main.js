@@ -29,35 +29,6 @@ Template.activebox.helpers({
   }
 });
 
-Template.expandables.helpers({
-  rival: function() {
-    let result = Rivalry.find().fetch();
-    return result;
-  },
-  data: function(a, b) {
-    if (_.findWhere(Session.get('opened'), {a: a, b: b})) {
-      let l = Player.findOne({name: a});
-      let r = Player.findOne({name: b});
-      if (l && r) {
-        return {left: l, right: r}
-      }
-    }
-    return false;
-  }
-});
-
-// handler for expanding a rivalry view
-Template.expandables.events({
-  'click .clickable': function(e) {
-    const a = e.target.getAttribute('data-a');
-    const b = e.target.getAttribute('data-b');
-    let existing = Session.get('opened');
-    if (!_.findWhere(Session.get('opened'), {a: a, b: b})) {
-      existing.push({a: a, b: b});
-      Session.set('opened', existing);
-    }
-  }
-});
 
 // handler for closing a rivalry view
 Template.close.events({
@@ -72,13 +43,22 @@ Template.close.events({
   }
 });
 
+Template.submission.helpers({
+  a: function() {
+    return Session.get('active').a;
+  },
+  b: function() {
+    return Session.get('active').b;
+  }
+});
+
 // handler for submitting a message
 Template.submission.events({
   'submit .submit': function(e) {
     e.preventDefault();
     console.log(e);
     const text = e.target.text.value;
-    const a = e.target.getAttribute('data-name');
+    const a = (e.target[1].checked) ? Session.get('active').a : Session.get('active').b;
     if (!text || text === '') {
       return;
     }
@@ -87,11 +67,6 @@ Template.submission.events({
     });
   }
 });
-
-// handler for making a chatroom scrolled to bottom
-Template.chatroom.rendered = function() {
-  this.firstNode.scrollTop = this.firstNode.scrollHeight;
-};
 
 // formatting time to user's local
 Template.chatroom.helpers({
@@ -106,5 +81,23 @@ Template.chatroom.helpers({
         min = "0" + min;
     }
     return hr + ':' + min + ':' + secs + ' ' + ampm;
+  },
+  tweets: function() {
+    let result = [];
+    const active = Session.get('active');
+    if (active && active.a && active.b) {
+      const l = Player.findOne({name: active.a});
+      const r = Player.findOne({name: active.b});
+      _.each(l.tweets, function(item) {
+        item.team = active.a;
+        result.push(item);
+      });
+      _.each(r.tweets, function(item) {
+        item.team = active.b;
+        result.push(item);
+      });
+    }
+    console.log(result);
+    return result;
   }
 });

@@ -27,27 +27,6 @@
     {{/with}}
 </template>
 
-<template name="expandables">
-    {{#each rival}}
-        {{#if data (a) (b)}}
-            {{#with data (a) (b)}}
-                {{> close}}
-                {{> comparison}}
-            {{/with}}
-        {{else}}
-            <div class="clickable" data-a={{a}} data-b={{b}}>
-                {{a}} versus {{b}}
-            </div>
-        {{/if}}
-    {{/each}}
-</template>
-
-<template name="rivalry">
-    {{#each rival}}
-        {{> comparison}}
-    {{/each}}
-</template>
-
 <template name="close">
     <div class="close" data-a={{left.name}} data-b={{right.name}}>
         CLOSE
@@ -80,7 +59,7 @@
     <div class="chatroom">
         {{#each tweets}}
             <div class="tweet">
-                <span>{{convertTime (time)}}</span>
+                <span>{{team}} - {{time}}</span>
                 <span>{{message}}</span>
             </div>
         {{/each}}
@@ -88,8 +67,10 @@
 </template>
 
 <template name="submission">
-    <form class="submit" data-name={{name}}>
+    <form class="submit">
         <input class="talk" name="text" type="text" />
+        <input type="radio" name="sex" value={{a}}>{{a}}
+        <input type="radio" name="sex" value={{b}}>{{b}}
         <input class="smack" type="submit" value="send" />
     </form>
 </template>

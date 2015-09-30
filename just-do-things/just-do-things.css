@@ -59,22 +59,12 @@ h2 {
     height: 250px;
 }
 
-.chatroom {
-    height: 350px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
 .tweet {
     padding: 5px;
 }
 
 .submit {
     padding: 10px;
-}
-
-.submit input:first-child {
-    width: 75%;
 }
 
 .tweet span {
